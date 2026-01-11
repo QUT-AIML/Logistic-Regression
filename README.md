@@ -1,131 +1,82 @@
-# Dataset Structure Outline
+# Logistic Regression
 
-This repository contains 4 different datasets for logistic regression projects:
+This repository is a comprehensive introduction to Logistic regression, designed to help users understand one of the foundational algorithms in machine learning through practical examples and real-world applications.
 
-#### 1. Asteroid Dataset (Requires Reassembly)
-- **Original file**: `asteriod/data/dataset.csv` (~435MB, 958,525 rows)
-- **Split chunks**: `asteriod/data/chunks/dataset_part_*.csv` (22 chunks, each <50MB)
-- **Content**: Asteroid orbital and physical characteristics data
-- **Status**: Split into chunks, needs reassembly
+Unlike linear regression, which predicts a continuous number (like house prices), logistic regression predicts a **probability** between 0 and 1. To ensure the output stays within this range, it uses a specific mathematical function called the **Sigmoid (or Logistic) Function**.
 
-#### 2. Fake News Detection Dataset (Requires Reassembly)
-- **Original file**: `fakeNewsDetection/data/dataset.csv`
-- **Split chunks**: `fakeNewsDetection/data/chunks/dataset_part_*.csv` (2 chunks)
-- **Content**: News articles with labels for fake news detection
-- **Status**: Split into chunks, needs reassembly
+## Projects Overview
 
-#### 3. Bank Loan Approval Dataset (Ready to Use)
-- **File**: `bankLoanApproval/data/dataset.csv`
-- **Content**: Bank loan application data for approval prediction
-- **Status**: Complete dataset, ready for analysis
+This repository contains 4 different logistic regression projects:
 
-#### 4. Heart Disease Prediction Dataset (Ready to Use)
-- **File**: `heartDiseasePrediction/data/dataset.csv`
-- **Content**: Medical data for heart disease prediction
-- **Status**: Complete dataset, ready for analysis
+#### 1. Asteroid Hazard Predictor
+- **Data**: Dataset CSV file in `Data/nasa.csv`
+- **Notebook**: `Asteriod Hazard Predictor/AsteroidHazardPredictor.ipynb`
+- **Content**: Data retrieved from the NASA Near Earth Object (NEO) API. This API provides critical information about space objects—such as comets and asteroids—that pass close to our planet's orbit.
+- **Objective**: The project’s primary objective is to classify whether an asteroid poses a threat to Earth based on data retrieved from the NASA Near Earth Object (NEO).
+- **Status**: Ready for analysis
 
-### Working with the Datasets
+#### 2. Bank Loan Approval
+- **Data**:  Dataset CSV file `Bank Loan Approval/data/dataset.csv`
+- **Notebook**: `Bank Loan Approval/predict-bank-personal-loan.ipynb`
+- **Content**: The dataset consists of 5,000 observations representing bank customers, featuring a mix of demographic data, relationship details with the bank, and their response to previous personal loan campaigns.
+- **Objective**: The goal of this project is to build a predictive model using Logistic Regression to identify the underlying patterns that distinguish loan acceptors from non-acceptors
+- **Status**: Ready for analysis
 
-#### For Datasets that Need Reassembly (Asteroid & Fake News Detection):
-If you're cloning this repository, you'll need to reassemble the split datasets:
-=======
-### Working with the Datasets
+#### 3. Fake News Detection
+- **Data**: Datasets on Fake and True news articles, CSV format located `/data`
+- **Notebook**: `Fake News Detection/fake-news-classification.ipynb`
+- **Content**: News Articles scraped from Web with Title, Text, Subject and Date columns
+- **Objective**: Simple but effective text classification model to detect fake news articles.
+- **Status**: Ready for analysis
 
-1. Navigate to the `scripts` directory
-2. Run the reassembly script:
-   ```bash
-   # On Windows (PowerShell/Command Prompt)
-   cd scripts
-   python reassemble_dataset_binary.py
-   # Or double-click reassemble_dataset.bat
-   
-   # On Unix/Linux/Mac
-   cd scripts
-   python3 reassemble_dataset_binary.py
-   ```
+#### 4. Heart Disease Prediction
+- **Data**: Framingham Heart Study dataset `data/framingham.csv`
+- **Notebook**: `Heart Disease Prediction/Predictive Modeling for 10-Year Cardiovascular Risk.ipynb`
+- **Content**: The dataset consists of 4,238 records and 15 independent variables.
+- **Objective**: This project implements a Logistic Regression classification model to predict the 10-year risk of future coronary heart disease (CHD) in patients
+- **Status**: Ready for analysis
 
-This will create:
-- `asteriod/data/dataset.csv` from the chunks in `asteriod/data/chunks/`
-- `fakeNewsDetection/data/dataset.csv` from the chunks in `fakeNewsDetection/data/chunks/`
-
-#### For Ready-to-Use Datasets (Bank Loan Approval & Heart Disease Prediction):
-These datasets are already complete and can be used directly:
-- `bankLoanApproval/data/dataset.csv`
-- `heartDiseasePrediction/data/dataset.csv`
-
-#### If you're contributing and need to split a large dataset:
-1. Place your large `dataset.csv` in the appropriate dataset directory (e.g., `asteriod/data/` or `fakeNewsDetection/data/`)
-2. Navigate to the `scripts` directory
-3. Run the splitting script:
-   ```bash
-   # On Windows (PowerShell/Command Prompt)
-   cd scripts
-   python split_dataset_binary.py
-   # Or double-click split_dataset.bat
-   
-   # On Unix/Linux/Mac
-   cd scripts
-   python3 split_dataset_binary.py
-   ```
-
-#### Files created by splitting:
-- For asteroid dataset: `asteriod/data/chunks/dataset_part_001.csv` through `dataset_part_022.csv`
-- For fake news dataset: `fakeNewsDetection/data/chunks/dataset_part_001.csv` through `dataset_part_002.csv`
-
-Each chunk file includes the CSV header and a portion of the data, making them independently usable for analysis if needed.
-
-### Requirements
-- Python 3.6 or higher
-- No additional packages required for dataset scripts (uses only built-in modules)
-
-### Git Configuration
-
-**Important**: A `.gitattributes` file has been included to prevent Git from modifying line endings in the dataset chunks. This ensures binary integrity across different operating systems.
-
-If you see Git warnings about "LF will be replaced by CRLF", this is normal and the `.gitattributes` file will handle it properly.
-
-## Current Structure
-```
-logistic-regression/
-├── README.md
-├── .gitignore
-├── .gitattributes
-├── asteriod/
-│   └── data/
-│       └── chunks/              # Split dataset chunks (22 files)
-│           ├── dataset_part_001.csv
-│           ├── dataset_part_002.csv
-│           ├── ...
-│           └── dataset_part_022.csv
-├── fakeNewsDetection/
-│   └── data/
-│       └── chunks/              # Split dataset chunks (2 files)
-│           ├── dataset_part_001.csv
-│           └── dataset_part_002.csv
-├── bankLoanApproval/
-│   └── data/
-│       └── dataset.csv          # Complete dataset (ready to use)
-├── heartDiseasePrediction/
-│   └── data/
-│       └── dataset.csv          # Complete dataset (ready to use)
-│       └── chunks/              # Split dataset chunks
-│           ├── dataset_part_001.csv
-│           ├── dataset_part_002.csv
-│           ├── ...
-│           └── dataset_part_***.csv
-└── scripts/
-    ├── reassemble_dataset_binary.py # Reassemble chunks into original files
-    └── split_dataset_binary.py      # Split large datasets into chunks
-```
 
 ## Getting Started
 
 1. Clone this repository
-2. **For datasets that need reassembly** (asteroid and fake news detection):
-   - Follow the reassembly instructions above to create the complete dataset files
-3. **For ready-to-use datasets** (bank loan approval and heart disease prediction):
-   - You can start using them immediately
-4. Install required Python packages for logistic regression:
-   ```bash
-   pip install pandas numpy scikit-learn matplotlib seaborn
-   ```
+2. Install required Python packages for linear regression,  note that each Notebook contains cell to install the dependencies, if required:   
+3. Choose a project folder and open the corresponding Jupyter notebook or in Google Collab
+4. Follow the analysis and experiment with different regression techniques
+
+## Project Structure
+
+```
+Logistic-Regression/
+├── README.md
+├── Asteriod Hazard Predictor/
+│   ├── AsteroidHazardPredictor.ipynb
+│   └── Data/
+│	├── nasa.csv
+├── Bank Loan Approval/
+│   ├── predict-bank-personal-loan.ipynb
+│   └── data/
+│	├── dataset.csv
+├── Fake News Detection/
+│   ├── fake-news-classification.ipynb
+│   └── Data/
+│	├── Fake.csv
+│	├── True.csv 
+├── Pokémon/
+│   ├── Pokémon Identification.ipynb
+│   └── Data/
+│	├── Pokemon.csv
+└── Heart Disease Prediction/
+    ├── Predictive Modeling for 10-Year Cardiovascular Risk.ipynb
+    └── Data/
+│	├── framingham.csv    
+```
+
+## Tips for Success
+
+1. **Data Exploration**: Understand your data through visualization
+2. **Feature Engineering**: Create meaningful features from raw data
+3. **Assumptions Check**: Validate linear regression assumptions
+4. **Regularization**: Use when dealing with overfitting
+5. **Cross-Validation**: Evaluate model performance properly
+6. **Interpretation**: Focus on understanding coefficient meanings
